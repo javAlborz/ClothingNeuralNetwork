@@ -4,6 +4,8 @@
 
 This project is a deep learning application designed for image inference, built with a neural network trained on the Zalando MNIST dataset. The dataset contains images of fashion items, and the model classifies these images into one of ten categories.
 
+![Clothing Inference](assets/clothing_inference.png)
+
 ### Model Architecture
 
 The neural network used for training is constructed using the `fc_model.Network` class. Below are the key components:

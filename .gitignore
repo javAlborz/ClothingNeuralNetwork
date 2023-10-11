@@ -1,4 +1,5 @@
-# .gitignore
+# Exempt the "assets" folder from image file rules
+!/assets/
 
 # Ignore image files
 *.jpg
