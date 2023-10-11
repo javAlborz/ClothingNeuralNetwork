@@ -1,0 +1,47 @@
+# Clothing Neural Network (CNN*)
+
+## Description
+
+This project is a deep learning application for image inference. Given an input image, it resizes the image, runs inference using a pre-trained deep learning model, and visualizes the results. 
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Installation
+
+### Prerequisites
+
+- Python (version 3.x recommended)
+- Libraries and packages: OpenCV, PIL, PyTorch, torchvision, etc.
+
+### Steps
+
+1. Clone the repository to your local machine:
+    ```bash
+    git clone <repository-url>
+    ```
+2. Navigate to the project directory:
+    ```bash
+    cd path-to-project-directory
+    ```
+3. Install the required packages and libraries:
+    ```bash
+    pip install -r requirements.txt  # If you have a requirements.txt file
+    ```
+
+## Usage
+
+### Image Inference
+
+1. Run the main script with the path to the input image:
+    ```bash
+    python main.py path-to-input-image
+    ```
+2. Optionally, skip the image resizing step by adding the `--skip_resize` flag:
+    ```bash
+    python main.py path-to-input-image --skip_resize
+    ```
