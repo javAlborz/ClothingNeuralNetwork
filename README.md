@@ -52,7 +52,7 @@ The neural network used for training is constructed using the `fc_model.Network`
     ```
 3. Install the required packages and libraries:
     ```bash
-    pip install -r requirements.txt  # If you have a requirements.txt file
+    pip install -r requirements.txt  
     ```
 
 ## Usage
