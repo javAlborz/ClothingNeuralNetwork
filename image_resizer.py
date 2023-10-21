@@ -59,8 +59,8 @@ def compute_padding(cropped_shape, template_size):
 def resize_and_pad(image, template_size):
     """Resize the image while preserving its aspect ratio to fit within the effective area of the template.
     Then, pad the image to match the template size."""
-    effective_width = template_size[0] - 400
-    effective_height = template_size[1] - 400
+    effective_width = template_size[0] - 100
+    effective_height = template_size[1] - 100
     image_aspect = image.shape[1] / image.shape[0]
     effective_aspect = effective_width / effective_height
     if image_aspect > effective_aspect:
@@ -123,10 +123,11 @@ def batch_resize(input_dir, output_dir, boxed_output_dir, template_size):
 
 
 if __name__ == "__main__":
-    input_dir = "raw"
+    input_dir = "raw2"
     output_dir = "resized"
-    # batch_resize("inputs", "outputs", (1000, 1000))  # For 1000x1000 template
-    # batch_resize("inputs", "outputs", (1801, 2600))  # For 1801x2600 template
+    boxed_output_dir = "boxed_outputs"
+    batch_resize("raw2", "outputs(1000x1000)", boxed_output_dir, (1000, 1000))  # For 1000x1000 template
+    batch_resize("raw2", "outputs(1801x2600)", boxed_output_dir, (1801, 2600))  # For 1801x2600 template
 
 
     # updated function on a problematic image
@@ -140,11 +141,12 @@ if __name__ == "__main__":
     #     print(f"Image {problematic_image_path} not found!")
 
 
-    if os.path.exists(input_dir):
-        boxed_output_dir = "boxed_outputs"
-        template_size_sample = (1000, 1000)
-        batch_resize(input_dir, output_dir, boxed_output_dir, template_size_sample)
+    # if os.path.exists(input_dir):
+    #     boxed_output_dir = "boxed_outputs"
+    #     template_size_sample = (1000, 1000)
+    #     batch_resize(input_dir, output_dir, boxed_output_dir, template_size_sample)
         
+
     # Check if images with bounding boxes were saved
     boxed_images = os.listdir(boxed_output_dir) if os.path.exists(boxed_output_dir) else []
     boxed_images
