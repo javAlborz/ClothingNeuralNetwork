@@ -5,33 +5,36 @@ import os
 
 def find_bounding_box(image):
     """
-    Finds the bounding box of the non-white object in the image.
+    Finds the bounding box of the non-white object in the image and dilates it to include shadows.
     Assumes the image has a white background.
     """
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    
-    # Use a slightly lower threshold value
     _, thresh = cv2.threshold(gray, 230, 255, cv2.THRESH_BINARY_INV)
-    
-    # Find all contours
     contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    
-    # If no contours are detected, return the whole image as bounding box
+
     if not contours:
         return 0, 0, image.shape[1], image.shape[0]
-    
-    # Consider all detected contours to determine the bounding box
+
     x_vals = []
     y_vals = []
     for contour in contours:
         x, y, w, h = cv2.boundingRect(contour)
-        x_vals.extend([x, x+w])
-        y_vals.extend([y, y+h])
-    
+        x_vals.extend([x, x + w])
+        y_vals.extend([y, y + h])
+
+    # Determine the minimal bounding box
     x_min, x_max = min(x_vals), max(x_vals)
     y_min, y_max = min(y_vals), max(y_vals)
-    
-    return x_min, y_min, x_max - x_min, y_max - y_min
+
+    # Dilate the bounding box
+    padding = 50  # Adjust this value as needed
+    x_min_dilated = max(x_min - padding, 0)
+    y_min_dilated = max(y_min - padding, 0)
+    x_max_dilated = min(x_max + padding, image.shape[1])
+    y_max_dilated = min(y_max + padding, image.shape[0])
+
+    return x_min_dilated, y_min_dilated, x_max_dilated - x_min_dilated, y_max_dilated - y_min_dilated
+
 
 
 def compute_padding(cropped_shape, template_size):
@@ -126,8 +129,31 @@ if __name__ == "__main__":
     input_dir = "raw2"
     output_dir = "resized"
     boxed_output_dir = "boxed_outputs"
-    batch_resize("raw2", "outputs(1000x1000)", boxed_output_dir, (1000, 1000))  # For 1000x1000 template
-    batch_resize("raw2", "outputs(1801x2600)", boxed_output_dir, (1801, 2600))  # For 1801x2600 template
+    # batch_resize("raw2", "outputs(1000x1000)", boxed_output_dir, (1000, 1000))  # For 1000x1000 template
+    # batch_resize("raw2", "outputs(1801x2600)", boxed_output_dir, (1801, 2600))  # For 1801x2600 template
+
+
+    # batch_resize("raw3", "outputs3(1000x1000)", boxed_output_dir, (1000, 1000))  
+    # batch_resize("raw4", "outputs4(1000x1000)", boxed_output_dir, (1000, 1000))  
+
+    # batch_resize("raw5", "outputs5(1000x1000)", boxed_output_dir, (1000, 1000))  # For 1000x1000 template
+    # batch_resize("raw5", "outputs5(1801x2600)", boxed_output_dir, (1801, 2600))  # For 1801x2600 template
+
+    # batch_resize("raw6", "outputs6(1000x1000)", boxed_output_dir, (1000, 1000))  # For 1000x1000 template
+    # batch_resize("raw6", "outputs6(1801x2600)", boxed_output_dir, (1801, 2600))  # For 1801x2600 template
+
+    # batch_resize("raw7", "outputs6(1000x1000)", boxed_output_dir, (1000, 1000)) 
+    # batch_resize("raw7", "outputs6(1801x2600)", boxed_output_dir, (1801, 2600))  
+
+    # batch_resize("personal", "personal(375x467)", boxed_output_dir, (375,467)) 
+
+    # batch_resize("raw8", "outputs8(1000x1000)", boxed_output_dir, (1000, 1000)) 
+    # batch_resize("raw8", "outputs8(1801x2600)", boxed_output_dir, (1801, 2600))  
+
+    batch_resize("raw9", "outputs9(1000x1000)", boxed_output_dir, (1000, 1000)) 
+    batch_resize("raw9", "outputs9(1801x2600)", boxed_output_dir, (1801, 2600))  
+
+
 
 
     # updated function on a problematic image
