@@ -30,8 +30,7 @@ The neural network used for training is constructed using the `fc_model.Network`
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
+
 
 ## Installation
 
